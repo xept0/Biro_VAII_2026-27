@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akordotheque - Song Catalog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Header -->
+<header class="top-header">
+    <div class="logo">
+        <span>🎸 Akordotheque</span>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="🔍 Search the entire library...">
+    </div>
+    <div class="user-profile">
+        <div class="avatar">LB</div>
+        <div class="user-info">
+            <strong>Lukáš Bíro</strong>
+            <span>Guitarist · My profile</span>
+        </div>
+    </div>
+</header>
+
+<div class="app-container">
+    <!-- Sidenav -->
+    <aside class="sidebar">
+        <nav>
+            <div class="nav-section">MAIN NAVIGATION</div>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#" class="active">Song Library</a></li>
+                <li><a href="#">Artists</a></li>
+                <li><a href="#">Favorites</a></li>
+                <li><a href="#">Practice Lists</a></li>
+            </ul>
+            <div class="nav-section admin-section">
+                <a href="#">Content Management <span>Admin only</span></a>
+            </div>
+        </nav>
+
+        <div class="role-info">
+            <strong>Role-based access</strong>
+            <ul>
+                <li>Visitor: public library</li>
+                <li>Guitarist: favorites and profile</li>
+                <li>Admin: content management</li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+        <div class="page-header">
+            <div class="title-group">
+                <h1>Song Catalog</h1>
+                <p>Find an arrangement you can play. Even without barre chords.</p>
+            </div>
+            <button class="btn-primary">Add Song +</button>
+        </div>
+
+        <!-- Filters -->
+        <section class="filters">
+            <div class="filter-inputs">
+                <div class="input-group">
+                    <label>Song or Artist</label>
+                    <input type="text" placeholder="🔍 E.g. Zombie or Nirvana">
+                </div>
+                <div class="input-group">
+                    <label>Difficulty</label>
+                    <select>
+                        <option>All difficulties</option>
+                        <option>Beginner</option>
+                        <option>Intermediate</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tags-filter">
+                <span>Tags:</span>
+                <button class="tag">Open chords</button>
+                <button class="tag active-tag">✓ No barre</button>
+                <button class="tag">90s rock</button>
+                <a href="#" class="clear-filters">Clear all filters</a>
+            </div>
+        </section>
+
+        <!-- Song list -->
+        <section class="catalog-list">
+            <div class="list-header">
+                <span>18 songs · No barre chord arrangements</span>
+                <div class="sort-group">
+                    <label>Sort by</label>
+                    <select>
+                        <option>Recommended</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="songs-table">
+                    <thead>
+                    <tr>
+                        <th>☆</th>
+                        <th>Song / Arrangement</th>
+                        <th>Artist</th>
+                        <th>Difficulty</th>
+                        <th>Chords</th>
+                        <th>Tags</th>
+                        <th>PDF</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>⭐</td>
+                        <td>
+                            <strong>Come As You Are</strong><br>
+                            <small>Simplified arrangement · saved</small>
+                        </td>
+                        <td>Nirvana</td>
+                        <td>Beginner</td>
+                        <td>Em · D · Am · C</td>
+                        <td>No barre, 90s rock</td>
+                        <td>PDF ↓</td>
+                        <td><button class="btn-secondary">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>☆</td>
+                        <td>
+                            <strong>Wonderwall</strong><br>
+                            <small>Simplified arrangement · chords</small>
+                        </td>
+                        <td>Oasis</td>
+                        <td>Intermediate</td>
+                        <td>Em7 · G · Dsus4...</td>
+                        <td>No barre, 90s rock</td>
+                        <td>PDF ↓</td>
+                        <td><button class="btn-secondary">View</button></td>
+                    </tr>
+                    <tr>
+                        <td>☆</td>
+                        <td>
+                            <strong>Zombie</strong><br>
+                            <small>Simplified arrangement · saved</small>
+                        </td>
+                        <td>The Cranberries</td>
+                        <td>Beginner</td>
+                        <td>Em · C · G · D</td>
+                        <td>No barre, 90s rock</td>
+                        <td>PDF ↓</td>
+                        <td><button class="btn-secondary">View</button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <span>Showing 1 – 3 of 18 songs</span>
+                <div class="page-controls">
+                    <button disabled>← Previous</button>
+                    <button class="active-page">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>Next →</button>
+                </div>
+            </div>
+
+            <p class="footnote">Showing simplified arrangements, not original recordings. "Saved" = song in favorites.</p>
+        </section>
+
+        <!-- Practice list widget -->
+        <div class="practice-widget">
+            <div class="widget-info">
+                <strong>My practice list · Evening warmup</strong>
+                <p>3 songs · Zombie, Wonderwall, Free Fallin' · for registered guitarist</p>
+            </div>
+            <a href="#" class="open-list">Open list →</a>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<footer class="app-footer">
+    <div class="footer-left">Akordotheque · Chords and tabs for guitarists</div>
+    <div class="footer-right">Lukáš Bíro · Study group 5ZYI34</div>
+</footer>
+</body>
+</html>
