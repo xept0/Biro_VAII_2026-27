@@ -61,3 +61,28 @@ Formuláre pre bezpečné prihlásenie a registráciu s validáciou vstupov.
 Komunikácia medzi klientskou a serverovou časťou vo frameworku VAJKO, databázový návrh v požadovanej kvalite (min. 3 entity, relačné väzby), implementácia používateľských rolí, autorizácia, aspoň 2 druhy AJAX volaní, spustiteľnosť v prostredí Docker.
 #### Rozširujúce funkcie:
 Vývoj používateľského rozhrania (SPA) pomocou frameworku React, asynchrónne volania na externé hudobné API (napríklad Songsterr alebo Spotify) pre automatické dopĺňanie metadát, implementácia in-place úpravy akordov priamo v tabuľke, pokročilá klientska validácia, prepracovaný responzívny dizajn.
+
+## Spustenie aplikácie (framework Vaííčko)
+Aplikácia je postavená na frameworku [Vaííčko](https://github.com/thevajko/vaiicko). Verejným koreňom webového servera je priečinok `public`.
+
+#### Možnosť 1 – Docker (odporúčané)
+```bash
+cd docker
+docker compose up
+```
+Aplikácia je potom dostupná na adrese http://localhost/.
+
+#### Možnosť 2 – vstavaný PHP server (PHP 8.1+)
+```bash
+php -S localhost:8000 -t public
+```
+Aplikácia je potom dostupná na adrese http://localhost:8000/.
+
+#### Dostupné stránky
+| Stránka | URL | Kontrolér / akcia | Pohľad |
+|---|---|---|---|
+| Úvodná stránka (Dashboard) | `?c=home` | `HomeController::index` | `App/Views/Home/index.view.php` |
+| Katalóg piesní | `?c=song` | `SongController::index` | `App/Views/Song/index.view.php` |
+
+Spoločné rozloženie (hlavička, bočná navigácia, päta) je v `App/Views/Layouts/root.layout.view.php`, štýly v `public/css/style.css` a obrázky v `public/images`.
+Pôvodné statické riešenie (HTML + CSS) je ponechané v priečinku `html`.

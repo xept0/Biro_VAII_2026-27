@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+    <!-- Simple guitar logo for Akordotheque -->
+    <rect width="64" height="64" rx="12" fill="#110c2c"/>
+    <g transform="rotate(-45 32 32)">
+        <rect x="29" y="4" width="6" height="30" rx="1" fill="#837ced"/>
+        <rect x="27" y="2" width="10" height="7" rx="2" fill="#97146a"/>
+        <ellipse cx="32" cy="38" rx="10" ry="9" fill="#e64a71"/>
+        <ellipse cx="32" cy="50" rx="13" ry="11" fill="#e64a71"/>
+        <circle cx="32" cy="42" r="3.5" fill="#07041b"/>
+        <rect x="27" y="52" width="10" height="3" rx="1" fill="#07041b"/>
+    </g>
+</svg>

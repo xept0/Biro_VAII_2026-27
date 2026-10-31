@@ -4,14 +4,67 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b85361c-b1d3-4339-bba8-740a6abca0b6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/VAII.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/html/style.css" afterDir="false" />
+    <list default="true" id="8b85361c-b1d3-4339-bba8-740a6abca0b6" name="Changes" comment="HTML a CSS navrh pre zakladne rozlozenie stranky">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Configuration.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controllers/AdminController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controllers/AuthController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Controllers/HomeController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Models/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/Admin/index.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/Auth/login.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/Auth/logout.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/Home/index.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/Layouts/auth.layout.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/Layouts/root.layout.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Views/_Error/error.view.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Auth/AppUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Auth/DummyAuthenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Auth/DummyUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Auth/SessionAuthenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/ClassLoader.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/App.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/BaseController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/ErrorHandler.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/IAuthenticator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/IHandleError.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/IIdentity.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/Model.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Core/Router.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/DB/Connection.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/DB/DebugStatement.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/DB/DefaultConventions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/DB/IDbConvention.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/DB/ResultSet.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/DB/SnakeConventions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/HttpException.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Request.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Responses/EmptyResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Responses/JsonResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Responses/RedirectResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Responses/Response.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Responses/ViewResponse.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/Session.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Http/UploadedFile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Support/Inflect.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Support/LinkGenerator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Support/View.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Framework/Support/functions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicons/site.webmanifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/vaiicko_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,23 +91,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0055626960765511" />
-      <entry key="MS500" value="1.354043859553636" />
-      <entry key="S2" value="1.7713727037907243" />
-      <entry key="S5" value="1.9013911021007122" />
-      <entry key="S10" value="1.9619790262183372" />
-      <entry key="S30" value="3.5857714306778052" />
-      <entry key="S60" value="8.94402823782282" />
-      <entry key="M2" value="18.935172132375918" />
-      <entry key="M5" value="36.29620064383643" />
-      <entry key="M10" value="49.82315649667091" />
-      <entry key="M15" value="56.56286789341273" />
-      <entry key="M30" value="65.07794759569937" />
-      <entry key="H1" value="70.18998921513234" />
-      <entry key="H2" value="73.00083041556641" />
-      <entry key="H4" value="74.47594552203597" />
-      <entry key="D1" value="75.74251036411488" />
-      <entry key="W1" value="75.96312943702912" />
+      <entry key="MS100" value="1.1576317003513694" />
+      <entry key="MS500" value="2.0858431200546583" />
+      <entry key="S2" value="4.817438161145194" />
+      <entry key="S5" value="8.43947500038865" />
+      <entry key="S10" value="11.229221300417755" />
+      <entry key="S30" value="15.338928832614373" />
+      <entry key="S60" value="21.119822563368395" />
+      <entry key="M2" value="31.378044655323965" />
+      <entry key="M5" value="49.223271501548034" />
+      <entry key="M10" value="63.11128044532637" />
+      <entry key="M15" value="70.03000816557528" />
+      <entry key="M30" value="78.77469328886956" />
+      <entry key="H1" value="84.02730463027268" />
+      <entry key="H2" value="86.91644754831948" />
+      <entry key="H4" value="88.432956158189" />
+      <entry key="D1" value="89.73523127510427" />
+      <entry key="W1" value="89.96208672544408" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -76,23 +129,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8633083852049219" />
-      <entry key="MS500" value="1.3128952324893841" />
-      <entry key="S2" value="1.7576527595972005" />
-      <entry key="S5" value="1.8954764473613432" />
-      <entry key="S10" value="1.9589366119566713" />
-      <entry key="S30" value="3.5844585766450328" />
-      <entry key="S60" value="8.942831618378017" />
-      <entry key="M2" value="18.93397174368062" />
-      <entry key="M5" value="36.29525398517079" />
-      <entry key="M10" value="49.82250262283829" />
-      <entry key="M15" value="56.56237318096037" />
-      <entry key="M30" value="65.07766357880905" />
-      <entry key="H1" value="70.18983631197318" />
-      <entry key="H2" value="73.0007509841011" />
-      <entry key="H4" value="74.47590502640257" />
-      <entry key="D1" value="75.74250350341238" />
-      <entry key="W1" value="75.96312845415827" />
+      <entry key="MS100" value="0.30514709010612523" />
+      <entry key="MS500" value="1.7646396874539785" />
+      <entry key="S2" value="4.718897877446952" />
+      <entry key="S5" value="8.392337041877408" />
+      <entry key="S10" value="11.202026249334917" />
+      <entry key="S30" value="15.32826444470774" />
+      <entry key="S60" value="21.11377425466869" />
+      <entry key="M2" value="31.374374410358193" />
+      <entry key="M5" value="49.22131937841062" />
+      <entry key="M10" value="63.110118199811055" />
+      <entry key="M15" value="70.0291727517675" />
+      <entry key="M30" value="78.77423780461694" />
+      <entry key="H1" value="84.02706565844974" />
+      <entry key="H2" value="86.91632499020265" />
+      <entry key="H4" value="88.43289407495816" />
+      <entry key="D1" value="89.7352208129905" />
+      <entry key="W1" value="89.9620852279993" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -137,6 +190,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/css" />
       <recent name="$PROJECT_DIR$/.idea" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/analyza" />
@@ -158,7 +212,8 @@
       <updated>1791562950524</updated>
       <workItem from="1791562953124" duration="71000" />
       <workItem from="1792495629990" duration="3582000" />
-      <workItem from="1792499222811" duration="345000" />
+      <workItem from="1792499222811" duration="669000" />
+      <workItem from="1793464925309" duration="2540000" />
     </task>
     <task id="LOCAL-00001" summary="Pridane wireframu pre webovu aplikaciu">
       <option name="closed" value="true" />
@@ -176,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792497311349</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="HTML a CSS navrh pre zakladne rozlozenie stranky">
+      <option name="closed" value="true" />
+      <created>1792499776225</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1792499776225</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,6 +248,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pridanie wireframu do priecinka analyza" />
     <MESSAGE value="Pridane wireframu pre webovu aplikaciu" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pridane wireframu pre webovu aplikaciu" />
+    <MESSAGE value="HTML a CSS navrh pre zakladne rozlozenie stranky" />
+    <option name="LAST_COMMIT_MESSAGE" value="HTML a CSS navrh pre zakladne rozlozenie stranky" />
   </component>
 </project>
