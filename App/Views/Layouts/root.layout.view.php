@@ -8,9 +8,20 @@
 $currentUrl = $link->url([]);
 
 /**
- * Returns the CSS class for a navigation link, "active" if the link points to the currently displayed page.
+ * Returns the CSS class for a navigation link, "active" if the link points to the currently displayed page
+ * or belongs to the same controller section.
  */
-$navClass = fn(string $destination): string => $link->url($destination) === $currentUrl ? 'active' : '';
+$navClass = function (string $destination) use ($link, $currentUrl): string {
+    $targetUrl = $link->url($destination);
+    if ($targetUrl === $currentUrl) {
+        return 'active';
+    }
+    $controllerPrefix = explode('.', $destination)[0] ?? '';
+    if ($controllerPrefix !== '' && str_contains($currentUrl, 'c=' . $controllerPrefix)) {
+        return 'active';
+    }
+    return '';
+};
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +45,10 @@ $navClass = fn(string $destination): string => $link->url($destination) === $cur
         <img src="<?= $link->asset('images/logo.svg') ?>" alt="" width="32" height="32">
         <span><?= App\Configuration::APP_NAME ?></span>
     </a>
-    <form class="search-bar" action="#" role="search">
+    <form class="search-bar" action="<?= $link->url('song.index') ?>" method="get" role="search">
+        <input type="hidden" name="c" value="song">
         <label for="global-search" class="visually-hidden">Search the entire library</label>
-        <input type="search" id="global-search" placeholder="🔍 Search the entire library...">
+        <input type="search" id="global-search" name="q" placeholder="🔍 Search the entire library...">
     </form>
     <div class="user-profile">
         <?php if ($user->isLoggedIn()) { ?>

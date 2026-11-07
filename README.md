@@ -78,11 +78,18 @@ php -S localhost:8000 -t public
 ```
 Aplikácia je potom dostupná na adrese http://localhost:8000/.
 
-#### Dostupné stránky
-| Stránka | URL | Kontrolér / akcia | Pohľad |
+#### Dostupné stránky a CRUD operácie (entita `Song`)
+| Stránka / Operácia | URL | Kontrolér / akcia | Pohľad / Model |
 |---|---|---|---|
 | Úvodná stránka (Dashboard) | `?c=home` | `HomeController::index` | `App/Views/Home/index.view.php` |
-| Katalóg piesní | `?c=song` | `SongController::index` | `App/Views/Song/index.view.php` |
+| Katalóg piesní (Read – zoznam) | `?c=song` | `SongController::index` | `App/Views/Song/index.view.php` |
+| Detail piesne (Read – detail) | `?c=song&a=show&id=1` | `SongController::show` | `App/Views/Song/show.view.php` |
+| Pridanie piesne (Create) | `?c=song&a=add` | `SongController::add` | `App/Views/Song/add.view.php` (`form.view.php`) |
+| Úprava piesne (Update) | `?c=song&a=edit&id=1` | `SongController::edit` | `App/Views/Song/edit.view.php` (`form.view.php`) |
+| Odstránenie piesne (Delete) | `?c=song&a=delete&id=1` | `SongController::delete` | presmerovanie na `?c=song` |
+| Správa obsahu (Admin) | `?c=admin` | `AdminController::index` | `App/Views/Admin/index.view.php` |
+
+Databázová entita `App\Models\Song` využíva vstavané ORM frameworku Vaííčko (`Framework\Core\Model`). SQL skript na vytvorenie a naplnenie tabuľky `songs` sa nachádza v `docker/sql/create_tables.sql` a pri štarte Docker kontajnera sa automaticky naimportuje.
 
 Spoločné rozloženie (hlavička, bočná navigácia, päta) je v `App/Views/Layouts/root.layout.view.php`, štýly v `public/css/style.css` a obrázky v `public/images`.
 Pôvodné statické riešenie (HTML + CSS) je ponechané v priečinku `html`.

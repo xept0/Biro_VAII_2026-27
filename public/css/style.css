@@ -510,9 +510,133 @@ body {
 }
 
 /* Links styled as buttons */
-a.btn-primary {
+a.btn-primary,
+a.btn-secondary {
     display: inline-block;
     text-decoration: none;
+    font-size: 0.9rem;
+}
+
+a.tag {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.85rem;
+}
+
+.song-title-link {
+    color: var(--text);
+    text-decoration: none;
+}
+
+.song-title-link:hover {
+    color: var(--primary);
+}
+
+/* Action buttons and row controls */
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.row-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.btn-danger {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-danger:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+.filter-submit {
+    display: flex;
+    align-items: flex-end;
+}
+
+/* CRUD Form styles */
+.song-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.input-group textarea {
+    background: var(--background);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 10px;
+}
+
+.alert-error {
+    background-color: rgba(230, 74, 113, 0.12);
+    border: 1px solid var(--accent);
+    border-left: 4px solid var(--accent);
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.alert-error ul {
+    margin-top: 8px;
+    padding-left: 20px;
+}
+
+.empty-state {
+    padding: 25px 0;
+    color: #aaa;
+}
+
+/* Song detail page */
+.stat-meta {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text);
+}
+
+.chord-sheet {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    color: var(--text);
 }
 
 /* Dashboard - statistics */
@@ -586,6 +710,10 @@ a.btn-primary {
 @media (max-width: 992px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-row {
+        flex-direction: column;
     }
 }
 

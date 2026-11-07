@@ -2,36 +2,64 @@
 
 /** @var \Framework\Support\LinkGenerator $link */
 /** @var \Framework\Auth\AppUser $user */
+/** @var \App\Models\Song[] $songs */
+/** @var string $search */
+/** @var string $difficulty */
+/** @var string $tag */
+
+$availableTags = ['Open chords', 'No barre', '90s rock', 'Folk rock', 'Rock'];
 ?>
 <div class="page-header">
     <div class="title-group">
         <h1>Song Catalog</h1>
         <p>Find an arrangement you can play. Even without barre chords.</p>
     </div>
-    <button type="button" class="btn-primary">Add Song +</button>
+    <a href="<?= $link->url('song.add') ?>" class="btn-primary">Add Song +</a>
 </div>
 
 <!-- Filters -->
 <section class="filters" aria-label="Song filters">
-    <div class="filter-inputs">
-        <div class="input-group">
-            <label for="filter-text">Song or Artist</label>
-            <input type="text" id="filter-text" placeholder="🔍 E.g. Zombie or Nirvana">
+    <form method="get" action="<?= $link->url('song.index') ?>">
+        <input type="hidden" name="c" value="song">
+        <?php if ($tag !== '') { ?>
+            <input type="hidden" name="tag" value="<?= e($tag) ?>">
+        <?php } ?>
+        <div class="filter-inputs">
+            <div class="input-group">
+                <label for="filter-text">Song, Artist or Chord</label>
+                <input type="text" id="filter-text" name="q" value="<?= e($search) ?>" placeholder="🔍 E.g. Zombie or Nirvana">
+            </div>
+            <div class="input-group">
+                <label for="filter-difficulty">Difficulty</label>
+                <select id="filter-difficulty" name="difficulty">
+                    <option value="">All difficulties</option>
+                    <?php foreach (\App\Models\Song::DIFFICULTIES as $diffOption) { ?>
+                        <option value="<?= e($diffOption) ?>" <?= $difficulty === $diffOption ? 'selected' : '' ?>>
+                            <?= e($diffOption) ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="filter-submit">
+                <button type="submit" class="btn-primary">Filter</button>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="filter-difficulty">Difficulty</label>
-            <select id="filter-difficulty">
-                <option>All difficulties</option>
-                <option>Beginner</option>
-                <option>Intermediate</option>
-            </select>
-        </div>
-    </div>
+    </form>
     <div class="tags-filter">
         <span>Tags:</span>
-        <button type="button" class="tag">Open chords</button>
-        <button type="button" class="tag active-tag">✓ No barre</button>
-        <button type="button" class="tag">90s rock</button>
+        <?php foreach ($availableTags as $tagItem) { ?>
+            <?php
+            $isActiveTag = strcasecmp($tag, $tagItem) === 0;
+            $tagUrl = $link->url('song.index', array_filter([
+                'q' => $search !== '' ? $search : null,
+                'difficulty' => $difficulty !== '' ? $difficulty : null,
+                'tag' => $isActiveTag ? null : $tagItem,
+            ]));
+            ?>
+            <a href="<?= $tagUrl ?>" class="tag <?= $isActiveTag ? 'active-tag' : '' ?>">
+                <?= $isActiveTag ? '✓ ' : '' ?><?= e($tagItem) ?>
+            </a>
+        <?php } ?>
         <a href="<?= $link->url('song.index') ?>" class="clear-filters">Clear all filters</a>
     </div>
 </section>
@@ -39,86 +67,64 @@
 <!-- Song list -->
 <section class="catalog-list" aria-label="Song list">
     <div class="list-header">
-        <span>18 songs · No barre chord arrangements</span>
-        <div class="sort-group">
-            <label for="sort-by">Sort by</label>
-            <select id="sort-by">
-                <option>Recommended</option>
-            </select>
-        </div>
+        <span><?= count($songs) ?> <?= count($songs) === 1 ? 'song' : 'songs' ?> in catalog</span>
+        <a href="<?= $link->url('song.add') ?>" class="open-list">+ Add new song</a>
     </div>
 
-    <div class="table-responsive">
-        <table class="songs-table">
-            <thead>
-            <tr>
-                <th>☆</th>
-                <th>Song / Arrangement</th>
-                <th>Artist</th>
-                <th>Difficulty</th>
-                <th>Chords</th>
-                <th>Tags</th>
-                <th>PDF</th>
-                <th>Detail</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>⭐</td>
-                <td>
-                    <strong>Come As You Are</strong><br>
-                    <small>Simplified arrangement · saved</small>
-                </td>
-                <td>Nirvana</td>
-                <td>Beginner</td>
-                <td>Em · D · Am · C</td>
-                <td>No barre, 90s rock</td>
-                <td>PDF ↓</td>
-                <td><button type="button" class="btn-secondary">View</button></td>
-            </tr>
-            <tr>
-                <td>☆</td>
-                <td>
-                    <strong>Wonderwall</strong><br>
-                    <small>Simplified arrangement · chords</small>
-                </td>
-                <td>Oasis</td>
-                <td>Intermediate</td>
-                <td>Em7 · G · Dsus4...</td>
-                <td>No barre, 90s rock</td>
-                <td>PDF ↓</td>
-                <td><button type="button" class="btn-secondary">View</button></td>
-            </tr>
-            <tr>
-                <td>☆</td>
-                <td>
-                    <strong>Zombie</strong><br>
-                    <small>Simplified arrangement · saved</small>
-                </td>
-                <td>The Cranberries</td>
-                <td>Beginner</td>
-                <td>Em · C · G · D</td>
-                <td>No barre, 90s rock</td>
-                <td>PDF ↓</td>
-                <td><button type="button" class="btn-secondary">View</button></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Pagination -->
-    <nav class="pagination" aria-label="Pagination">
-        <span>Showing 1 – 3 of 18 songs</span>
-        <div class="page-controls">
-            <button type="button" disabled>← Previous</button>
-            <button type="button" class="active-page">1</button>
-            <button type="button">2</button>
-            <button type="button">3</button>
-            <button type="button">Next →</button>
+    <?php if (empty($songs)) { ?>
+        <p class="empty-state">
+            No songs matched your criteria.
+            <a href="<?= $link->url('song.add') ?>" class="open-list">Add a new song</a> or
+            <a href="<?= $link->url('song.index') ?>" class="open-list">reset filters</a>.
+        </p>
+    <?php } else { ?>
+        <div class="table-responsive">
+            <table class="songs-table">
+                <thead>
+                <tr>
+                    <th>☆</th>
+                    <th>Song / Arrangement</th>
+                    <th>Artist</th>
+                    <th>Difficulty</th>
+                    <th>Chords</th>
+                    <th>Tags</th>
+                    <th>Detail</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($songs as $song) { ?>
+                    <tr>
+                        <td>☆</td>
+                        <td>
+                            <a href="<?= $link->url('song.show', ['id' => $song->getId()]) ?>" class="song-title-link">
+                                <strong><?= e($song->getTitle()) ?></strong>
+                            </a><br>
+                            <small>Simplified arrangement · chords</small>
+                        </td>
+                        <td><?= e($song->getArtist()) ?></td>
+                        <td><?= e($song->getDifficulty()) ?></td>
+                        <td><?= e($song->getChords()) ?></td>
+                        <td><?= e($song->getTags() ?: '—') ?></td>
+                        <td>
+                            <a href="<?= $link->url('song.show', ['id' => $song->getId()]) ?>" class="btn-secondary">View</a>
+                        </td>
+                        <td>
+                            <div class="row-actions">
+                                <a href="<?= $link->url('song.edit', ['id' => $song->getId()]) ?>" class="btn-secondary">Edit</a>
+                                <form method="post" action="<?= $link->url('song.delete', ['id' => $song->getId()]) ?>" class="inline-form">
+                                    <button type="submit" class="btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
         </div>
-    </nav>
+    <?php } ?>
 
-    <p class="footnote">Showing simplified arrangements, not original recordings. "Saved" = song in favorites.</p>
+    <p class="footnote">Showing simplified arrangements loaded from the MariaDB database via Vaííčko ORM.</p>
 </section>
 
 <!-- Practice list widget -->
@@ -127,5 +133,5 @@
         <strong>My practice list · Evening warmup</strong>
         <p>3 songs · Zombie, Wonderwall, Free Fallin' · for registered guitarist</p>
     </div>
-    <a href="#" class="open-list">Open list →</a>
+    <a href="<?= $link->url('home.index') ?>" class="open-list">Back to Dashboard →</a>
 </aside>

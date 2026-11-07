@@ -2,41 +2,49 @@
 
 /** @var \Framework\Support\LinkGenerator $link */
 /** @var \Framework\Auth\AppUser $user */
+/** @var \App\Models\Song[] $latestSongs */
+/** @var int $songsCount */
+/** @var int $artistsCount */
+/** @var int $noBarreCount */
 ?>
 <div class="page-header">
     <div class="title-group">
         <h1>Dashboard</h1>
         <p>Welcome to <?= App\Configuration::APP_NAME ?> – your self-hosted library of guitar chords and tabs.</p>
     </div>
-    <a href="<?= $link->url('song.index') ?>" class="btn-primary">Browse Song Library →</a>
+    <div class="action-buttons">
+        <a href="<?= $link->url('song.add') ?>" class="btn-secondary">+ Add Song</a>
+        <a href="<?= $link->url('song.index') ?>" class="btn-primary">Browse Song Library →</a>
+    </div>
 </div>
 
 <!-- Library statistics -->
 <section class="stats" aria-label="Library statistics">
     <div class="stat-card">
-        <span class="stat-value">18</span>
+        <span class="stat-value"><?= e($songsCount) ?></span>
         <span class="stat-label">Songs</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">12</span>
+        <span class="stat-value"><?= e($artistsCount) ?></span>
         <span class="stat-label">Artists</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">11</span>
+        <span class="stat-value"><?= e($noBarreCount) ?></span>
         <span class="stat-label">No barre arrangements</span>
     </div>
     <div class="stat-card">
-        <span class="stat-value">7</span>
-        <span class="stat-label">PDF tabs</span>
+        <span class="stat-value"><?= e($songsCount) ?></span>
+        <span class="stat-label">Chord sheets</span>
     </div>
 </section>
 
 <!-- Quick search -->
 <section class="filters" aria-label="Quick search">
-    <form class="quick-search" action="#" role="search">
+    <form class="quick-search" action="<?= $link->url('song.index') ?>" method="get" role="search">
+        <input type="hidden" name="c" value="song">
         <div class="input-group">
             <label for="quick-search">Quick search</label>
-            <input type="search" id="quick-search" placeholder="🔍 Song, artist or chord...">
+            <input type="search" id="quick-search" name="q" placeholder="🔍 Song, artist or chord...">
         </div>
         <button type="submit" class="btn-primary">Search</button>
     </form>
@@ -48,29 +56,23 @@
         <h2 id="latest-heading">Recently added songs</h2>
         <a href="<?= $link->url('song.index') ?>" class="open-list">Show all →</a>
     </div>
-    <ul class="latest-songs">
-        <li>
-            <div>
-                <strong>Zombie</strong>
-                <small>The Cranberries · Em · C · G · D</small>
-            </div>
-            <span class="tag">Beginner</span>
-        </li>
-        <li>
-            <div>
-                <strong>Wonderwall</strong>
-                <small>Oasis · Em7 · G · Dsus4 · A7sus4</small>
-            </div>
-            <span class="tag">Intermediate</span>
-        </li>
-        <li>
-            <div>
-                <strong>Come As You Are</strong>
-                <small>Nirvana · Em · D · Am · C</small>
-            </div>
-            <span class="tag">Beginner</span>
-        </li>
-    </ul>
+    <?php if (empty($latestSongs)) { ?>
+        <p class="empty-state">No songs in the library yet. <a href="<?= $link->url('song.add') ?>" class="open-list">Add the first song →</a></p>
+    <?php } else { ?>
+        <ul class="latest-songs">
+            <?php foreach ($latestSongs as $song) { ?>
+                <li>
+                    <div>
+                        <a href="<?= $link->url('song.show', ['id' => $song->getId()]) ?>" class="song-title-link">
+                            <strong><?= e($song->getTitle()) ?></strong>
+                        </a>
+                        <small><?= e($song->getArtist()) ?> · <?= e($song->getChords()) ?></small>
+                    </div>
+                    <span class="tag"><?= e($song->getDifficulty()) ?></span>
+                </li>
+            <?php } ?>
+        </ul>
+    <?php } ?>
 </section>
 
 <!-- Practice list widget -->
@@ -79,5 +81,5 @@
         <strong>My practice list · Evening warmup</strong>
         <p>3 songs · Zombie, Wonderwall, Free Fallin' · for registered guitarist</p>
     </div>
-    <a href="#" class="open-list">Open list →</a>
+    <a href="<?= $link->url('song.index') ?>" class="open-list">Open library →</a>
 </aside>
