@@ -2,14 +2,28 @@
 
 /** @var \Framework\Support\LinkGenerator $link */
 /** @var \App\Models\Song $song */
+
+$artist = $song->getArtist();
 ?>
 <div class="page-header">
     <div class="title-group">
         <h1><?= e($song->getTitle()) ?></h1>
-        <p><?= e($song->getArtist()) ?> · Simplified guitar arrangement</p>
+        <p>
+            <?php if ($artist !== null) { ?>
+                <a href="<?= $link->url('artist.show', ['id' => $artist->getId()]) ?>" class="open-list">
+                    <?= e($artist->getName()) ?>
+                </a>
+            <?php } else { ?>
+                Unassigned artist
+            <?php } ?>
+            · Simplified guitar arrangement
+        </p>
     </div>
     <div class="action-buttons">
         <a href="<?= $link->url('song.index') ?>" class="btn-secondary">← Back to Catalog</a>
+        <?php if ($artist !== null) { ?>
+            <a href="<?= $link->url('artist.show', ['id' => $artist->getId()]) ?>" class="btn-secondary">View Artist Profile</a>
+        <?php } ?>
         <a href="<?= $link->url('song.edit', ['id' => $song->getId()]) ?>" class="btn-primary">Edit Song</a>
         <form method="post" action="<?= $link->url('song.delete', ['id' => $song->getId()]) ?>" class="inline-form">
             <button type="submit" class="btn-danger">Delete Song</button>
@@ -20,7 +34,15 @@
 <section class="stats" aria-label="Song metadata">
     <div class="stat-card">
         <span class="stat-label">Artist</span>
-        <span class="stat-meta"><?= e($song->getArtist()) ?></span>
+        <span class="stat-meta">
+            <?php if ($artist !== null) { ?>
+                <a href="<?= $link->url('artist.show', ['id' => $artist->getId()]) ?>" class="open-list">
+                    <?= e($artist->getName()) ?>
+                </a>
+            <?php } else { ?>
+                Unassigned
+            <?php } ?>
+        </span>
     </div>
     <div class="stat-card">
         <span class="stat-label">Difficulty</span>

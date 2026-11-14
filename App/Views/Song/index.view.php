@@ -3,7 +3,9 @@
 /** @var \Framework\Support\LinkGenerator $link */
 /** @var \Framework\Auth\AppUser $user */
 /** @var \App\Models\Song[] $songs */
+/** @var \App\Models\Artist[] $artists */
 /** @var string $search */
+/** @var int|null $artistId */
 /** @var string $difficulty */
 /** @var string $tag */
 
@@ -30,6 +32,17 @@ $availableTags = ['Open chords', 'No barre', '90s rock', 'Folk rock', 'Rock'];
                 <input type="text" id="filter-text" name="q" value="<?= e($search) ?>" placeholder="🔍 E.g. Zombie or Nirvana">
             </div>
             <div class="input-group">
+                <label for="filter-artist">Artist</label>
+                <select id="filter-artist" name="artistId">
+                    <option value="">All artists</option>
+                    <?php foreach ($artists as $artistOption) { ?>
+                        <option value="<?= e($artistOption->getId()) ?>" <?= $artistId === $artistOption->getId() ? 'selected' : '' ?>>
+                            <?= e($artistOption->getName()) ?>
+                        </option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="input-group">
                 <label for="filter-difficulty">Difficulty</label>
                 <select id="filter-difficulty" name="difficulty">
                     <option value="">All difficulties</option>
@@ -52,6 +65,7 @@ $availableTags = ['Open chords', 'No barre', '90s rock', 'Folk rock', 'Rock'];
             $isActiveTag = strcasecmp($tag, $tagItem) === 0;
             $tagUrl = $link->url('song.index', array_filter([
                 'q' => $search !== '' ? $search : null,
+                'artistId' => $artistId !== null ? $artistId : null,
                 'difficulty' => $difficulty !== '' ? $difficulty : null,
                 'tag' => $isActiveTag ? null : $tagItem,
             ]));
@@ -94,6 +108,7 @@ $availableTags = ['Open chords', 'No barre', '90s rock', 'Folk rock', 'Rock'];
                 </thead>
                 <tbody>
                 <?php foreach ($songs as $song) { ?>
+                    <?php $artist = $song->getArtist(); ?>
                     <tr>
                         <td>☆</td>
                         <td>
@@ -102,7 +117,15 @@ $availableTags = ['Open chords', 'No barre', '90s rock', 'Folk rock', 'Rock'];
                             </a><br>
                             <small>Simplified arrangement · chords</small>
                         </td>
-                        <td><?= e($song->getArtist()) ?></td>
+                        <td>
+                            <?php if ($artist !== null) { ?>
+                                <a href="<?= $link->url('artist.show', ['id' => $artist->getId()]) ?>" class="open-list">
+                                    <?= e($artist->getName()) ?>
+                                </a>
+                            <?php } else { ?>
+                                <span>Unassigned</span>
+                            <?php } ?>
+                        </td>
                         <td><?= e($song->getDifficulty()) ?></td>
                         <td><?= e($song->getChords()) ?></td>
                         <td><?= e($song->getTags() ?: '—') ?></td>

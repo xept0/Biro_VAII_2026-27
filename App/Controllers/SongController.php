@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Artist;
 use App\Models\Song;
 use Exception;
 use Framework\Core\BaseController;
@@ -13,7 +14,8 @@ use Framework\Http\Responses\Response;
  * Class SongController
  * Handles CRUD actions for the song library (catalog of songs and guitar arrangements).
  *
- * Uses the built-in Vaííčko ORM (`App\Models\Song`) to list, view, create, update, and delete records.
+ * Uses the built-in Vaííčko ORM (`App\Models\Song` and `App\Models\Artist`) to list, view,
+ * create, update, and delete records and manage their N:1 relationship to artists.
  *
  * @package App\Controllers
  */
@@ -36,7 +38,7 @@ class SongController extends BaseController
     /**
      * Displays the song catalog page with records loaded from the database (Read).
      *
-     * Supports optional filtering by text (title, artist, chords), difficulty, and tag.
+     * Supports optional filtering by text (title, chords, or artist name), artist, difficulty, and tag.
      *
      * @param Request $request The incoming HTTP request.
      * @return Response The response object containing the rendered HTML for the song catalog.
@@ -47,16 +49,25 @@ class SongController extends BaseController
         $search = trim((string)($request->get('q') ?? ''));
         $difficulty = trim((string)($request->get('difficulty') ?? ''));
         $tag = trim((string)($request->get('tag') ?? ''));
+        $rawArtistId = $request->get('artistId');
+        $artistId = ($rawArtistId !== null && $rawArtistId !== '' && is_numeric($rawArtistId) && (int)$rawArtistId > 0)
+            ? (int)$rawArtistId
+            : null;
 
         $conditions = [];
         $params = [];
 
         if ($search !== '') {
-            $conditions[] = '(`title` LIKE ? OR `artist` LIKE ? OR `chords` LIKE ?)';
+            $conditions[] = '(`title` LIKE ? OR `chords` LIKE ? OR `artistId` IN (SELECT `id` FROM `artists` WHERE `name` LIKE ?))';
             $like = '%' . $search . '%';
             $params[] = $like;
             $params[] = $like;
             $params[] = $like;
+        }
+
+        if ($artistId !== null) {
+            $conditions[] = '`artistId` = ?';
+            $params[] = $artistId;
         }
 
         if ($difficulty !== '' && in_array($difficulty, Song::DIFFICULTIES, true)) {
@@ -71,10 +82,13 @@ class SongController extends BaseController
 
         $whereClause = !empty($conditions) ? implode(' AND ', $conditions) : null;
         $songs = Song::getAll($whereClause, $params, '`id` DESC');
+        $artists = Artist::getAll(orderBy: '`name` ASC');
 
         return $this->html([
             'songs' => $songs,
+            'artists' => $artists,
             'search' => $search,
+            'artistId' => $artistId,
             'difficulty' => $difficulty,
             'tag' => $tag,
         ]);
@@ -110,6 +124,12 @@ class SongController extends BaseController
     public function add(Request $request): Response
     {
         $song = new Song();
+        $preselectedArtistId = $request->get('artistId');
+        if ($preselectedArtistId !== null && is_numeric($preselectedArtistId) && (int)$preselectedArtistId > 0) {
+            $song->setArtistId((int)$preselectedArtistId);
+        }
+
+        $artists = Artist::getAll(orderBy: '`name` ASC');
         $errors = [];
 
         if ($request->isPost()) {
@@ -122,6 +142,7 @@ class SongController extends BaseController
 
         return $this->html([
             'song' => $song,
+            'artists' => $artists,
             'errors' => $errors,
         ]);
     }
@@ -141,6 +162,7 @@ class SongController extends BaseController
             throw new HttpException(404, 'Requested song was not found.');
         }
 
+        $artists = Artist::getAll(orderBy: '`name` ASC');
         $errors = [];
 
         if ($request->isPost()) {
@@ -153,6 +175,7 @@ class SongController extends BaseController
 
         return $this->html([
             'song' => $song,
+            'artists' => $artists,
             'errors' => $errors,
         ]);
     }
@@ -188,7 +211,6 @@ class SongController extends BaseController
         $song->setFromRequest($request);
 
         $song->setTitle(trim((string)$song->getTitle()));
-        $song->setArtist(trim((string)$song->getArtist()));
         $song->setDifficulty(trim((string)$song->getDifficulty()));
         $song->setChords(trim((string)$song->getChords()));
         $song->setTags(trim((string)$song->getTags()));
@@ -200,8 +222,8 @@ class SongController extends BaseController
             $errors['title'] = 'Song title is required.';
         }
 
-        if ($song->getArtist() === '') {
-            $errors['artist'] = 'Artist name is required.';
+        if ($song->getArtistId() === null || Artist::getOne($song->getArtistId()) === null) {
+            $errors['artistId'] = 'Please select a valid artist.';
         }
 
         if (!in_array($song->getDifficulty(), Song::DIFFICULTIES, true)) {

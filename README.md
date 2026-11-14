@@ -78,7 +78,7 @@ php -S localhost:8000 -t public
 ```
 Aplikácia je potom dostupná na adrese http://localhost:8000/.
 
-#### Dostupné stránky a CRUD operácie (entita `Song`)
+#### Dostupné stránky a CRUD operácie (entity `Song` a `Artist`, vzťah 1:N)
 | Stránka / Operácia | URL | Kontrolér / akcia | Pohľad / Model |
 |---|---|---|---|
 | Úvodná stránka (Dashboard) | `?c=home` | `HomeController::index` | `App/Views/Home/index.view.php` |
@@ -87,9 +87,14 @@ Aplikácia je potom dostupná na adrese http://localhost:8000/.
 | Pridanie piesne (Create) | `?c=song&a=add` | `SongController::add` | `App/Views/Song/add.view.php` (`form.view.php`) |
 | Úprava piesne (Update) | `?c=song&a=edit&id=1` | `SongController::edit` | `App/Views/Song/edit.view.php` (`form.view.php`) |
 | Odstránenie piesne (Delete) | `?c=song&a=delete&id=1` | `SongController::delete` | presmerovanie na `?c=song` |
+| Katalóg interpretov (Read – zoznam) | `?c=artist` | `ArtistController::index` | `App/Views/Artist/index.view.php` |
+| Detail interpreta (Read – detail + piesne 1:N) | `?c=artist&a=show&id=1` | `ArtistController::show` | `App/Views/Artist/show.view.php` |
+| Pridanie interpreta (Create + prepojenie piesní) | `?c=artist&a=add` | `ArtistController::add` | `App/Views/Artist/add.view.php` (`form.view.php`) |
+| Úprava interpreta (Update + úprava prepojení) | `?c=artist&a=edit&id=1` | `ArtistController::edit` | `App/Views/Artist/edit.view.php` (`form.view.php`) |
+| Odstránenie interpreta (Delete) | `?c=artist&a=delete&id=1` | `ArtistController::delete` | presmerovanie na `?c=artist` |
 | Správa obsahu (Admin) | `?c=admin` | `AdminController::index` | `App/Views/Admin/index.view.php` |
 
-Databázová entita `App\Models\Song` využíva vstavané ORM frameworku Vaííčko (`Framework\Core\Model`). SQL skript na vytvorenie a naplnenie tabuľky `songs` sa nachádza v `docker/sql/create_tables.sql` a pri štarte Docker kontajnera sa automaticky naimportuje.
+Databázové entity `App\Models\Artist` (tabuľka `artists`) a `App\Models\Song` (tabuľka `songs`) využívajú vstavané ORM frameworku Vaííčko (`Framework\Core\Model`, vrátane relačných metód `getAllRelated` a `getOneRelated`) a sú prepojené vzťahom **1:N** pomocou cudzieho kľúča `songs.artistId -> artists.id`. SQL skript na vytvorenie a naplnenie tabuliek `artists` a `songs` sa nachádza v `docker/sql/create_tables.sql` a pri štarte Docker kontajnera sa automaticky naimportuje.
 
 Spoločné rozloženie (hlavička, bočná navigácia, päta) je v `App/Views/Layouts/root.layout.view.php`, štýly v `public/css/style.css` a obrázky v `public/images`.
 Pôvodné statické riešenie (HTML + CSS) je ponechané v priečinku `html`.

@@ -2,6 +2,7 @@
 
 /** @var \Framework\Support\LinkGenerator $link */
 /** @var \App\Models\Song $song */
+/** @var \App\Models\Artist[] $artists */
 /** @var array<string, string> $errors */
 /** @var string $formAction */
 /** @var string $submitLabel */
@@ -37,15 +38,22 @@
             </div>
 
             <div class="input-group">
-                <label for="song-artist">Artist / Band *</label>
-                <input
-                    type="text"
-                    id="song-artist"
-                    name="artist"
-                    value="<?= e($song->getArtist()) ?>"
-                    placeholder="E.g. Nirvana"
-                    required
-                >
+                <div class="label-with-link">
+                    <label for="song-artist">Artist / Band *</label>
+                    <a href="<?= $link->url('artist.add') ?>" class="open-list">+ New artist</a>
+                </div>
+                <select id="song-artist" name="artistId" required>
+                    <option value="">-- Select an artist --</option>
+                    <?php foreach ($artists as $artistOption) { ?>
+                        <option
+                            value="<?= e($artistOption->getId()) ?>"
+                            <?= $song->getArtistId() === $artistOption->getId() ? 'selected' : '' ?>
+                        >
+                            <?= e($artistOption->getName()) ?>
+                            <?= $artistOption->getGenre() ? ' (' . e($artistOption->getGenre()) . ')' : '' ?>
+                        </option>
+                    <?php } ?>
+                </select>
             </div>
         </div>
 

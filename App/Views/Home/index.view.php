@@ -13,6 +13,7 @@
         <p>Welcome to <?= App\Configuration::APP_NAME ?> – your self-hosted library of guitar chords and tabs.</p>
     </div>
     <div class="action-buttons">
+        <a href="<?= $link->url('artist.add') ?>" class="btn-secondary">+ Add Artist</a>
         <a href="<?= $link->url('song.add') ?>" class="btn-secondary">+ Add Song</a>
         <a href="<?= $link->url('song.index') ?>" class="btn-primary">Browse Song Library →</a>
     </div>
@@ -26,7 +27,7 @@
     </div>
     <div class="stat-card">
         <span class="stat-value"><?= e($artistsCount) ?></span>
-        <span class="stat-label">Artists</span>
+        <span class="stat-label"><a href="<?= $link->url('artist.index') ?>" class="open-list">Artists</a></span>
     </div>
     <div class="stat-card">
         <span class="stat-value"><?= e($noBarreCount) ?></span>
@@ -61,12 +62,20 @@
     <?php } else { ?>
         <ul class="latest-songs">
             <?php foreach ($latestSongs as $song) { ?>
+                <?php $artist = $song->getArtist(); ?>
                 <li>
                     <div>
                         <a href="<?= $link->url('song.show', ['id' => $song->getId()]) ?>" class="song-title-link">
                             <strong><?= e($song->getTitle()) ?></strong>
                         </a>
-                        <small><?= e($song->getArtist()) ?> · <?= e($song->getChords()) ?></small>
+                        <small>
+                            <?php if ($artist !== null) { ?>
+                                <a href="<?= $link->url('artist.show', ['id' => $artist->getId()]) ?>" class="open-list"><?= e($artist->getName()) ?></a>
+                            <?php } else { ?>
+                                Unassigned
+                            <?php } ?>
+                            · <?= e($song->getChords()) ?>
+                        </small>
                     </div>
                     <span class="tag"><?= e($song->getDifficulty()) ?></span>
                 </li>

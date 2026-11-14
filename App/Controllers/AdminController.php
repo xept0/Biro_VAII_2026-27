@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Artist;
 use App\Models\Song;
 use Exception;
 use Framework\Core\BaseController;
@@ -45,9 +46,11 @@ class AdminController extends BaseController
     public function index(Request $request): Response
     {
         $songs = Song::getAll(orderBy: '`id` DESC');
+        $artists = Artist::getAll(orderBy: '`name` ASC');
 
         return $this->html([
             'songs' => $songs,
+            'artists' => $artists,
         ]);
     }
 }

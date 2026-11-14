@@ -4,22 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b85361c-b1d3-4339-bba8-740a6abca0b6" name="Changes" comment="Integracia rozlozenia aplikacie do frameworku VAIIcko">
-      <change afterPath="$PROJECT_DIR$/App/Models/Song.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Views/Song/add.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Views/Song/edit.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Views/Song/form.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/App/Views/Song/show.view.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/sql/create_tables.sql" afterDir="false" />
+    <list default="true" id="8b85361c-b1d3-4339-bba8-740a6abca0b6" name="Changes" comment="Zakladna databaza a CRUD operacie">
+      <change afterPath="$PROJECT_DIR$/App/Controllers/ArtistController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/App/Models/Artist.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Controllers/SongController.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Controllers/SongController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Models/Song.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Models/Song.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Views/Admin/index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Admin/index.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Views/Home/index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Home/index.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Views/Layouts/root.layout.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Layouts/root.layout.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/Song/add.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Song/add.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/Song/edit.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Song/edit.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/Song/form.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Song/form.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App/Views/Song/index.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Song/index.view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App/Views/Song/show.view.php" beforeDir="false" afterPath="$PROJECT_DIR$/App/Views/Song/show.view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/sql/create_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docker/sql/create_tables.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,23 +49,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000058599696" />
-      <entry key="MS500" value="1.031322919174407" />
-      <entry key="S2" value="2.3867150838128066" />
-      <entry key="S5" value="5.671207549591027" />
-      <entry key="S10" value="8.610735593941545" />
-      <entry key="S30" value="11.817619427519574" />
-      <entry key="S60" value="12.85085173915022" />
-      <entry key="M2" value="13.41007970567898" />
-      <entry key="M5" value="13.785460956608752" />
-      <entry key="M10" value="15.308250528264109" />
-      <entry key="M15" value="19.52382009692415" />
-      <entry key="M30" value="36.244334655149785" />
-      <entry key="H1" value="58.67184598359396" />
-      <entry key="H2" value="77.37786460892437" />
-      <entry key="H4" value="89.51574488988298" />
-      <entry key="D1" value="101.40458295398469" />
-      <entry key="W1" value="103.62452197365938" />
+      <entry key="MS100" value="1.0222921527618618" />
+      <entry key="MS500" value="1.6680152346931818" />
+      <entry key="S2" value="4.100012113038828" />
+      <entry key="S5" value="8.12731908326252" />
+      <entry key="S10" value="12.356110814616317" />
+      <entry key="S30" value="17.80769126716929" />
+      <entry key="S60" value="19.745179155445612" />
+      <entry key="M2" value="20.82947403156006" />
+      <entry key="M5" value="21.545847234237794" />
+      <entry key="M10" value="23.177625832885393" />
+      <entry key="M15" value="27.417369316549742" />
+      <entry key="M30" value="44.15278430226253" />
+      <entry key="H1" value="66.60036663514296" />
+      <entry key="H2" value="85.33140296451934" />
+      <entry key="H4" value="97.48903493839478" />
+      <entry key="D1" value="109.39956328088324" />
+      <entry key="W1" value="111.62378972492203" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -85,24 +87,27 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="4.6629387050936293E-7" />
-      <entry key="MS500" value="0.0851668267912218" />
-      <entry key="S2" value="1.8667390502681795" />
-      <entry key="S5" value="5.415204287374163" />
-      <entry key="S10" value="8.472557536130397" />
-      <entry key="S30" value="11.76898472338097" />
-      <entry key="S60" value="12.826187540717738" />
-      <entry key="M2" value="13.397658754884912" />
-      <entry key="M5" value="13.78046996416371" />
-      <entry key="M10" value="15.305725593741522" />
-      <entry key="M15" value="19.522086684979296" />
-      <entry key="M30" value="36.24337212041741" />
-      <entry key="H1" value="58.671301938123875" />
-      <entry key="H2" value="77.37756673111497" />
-      <entry key="H4" value="89.51558761691157" />
-      <entry key="D1" value="101.40455538686112" />
-      <entry key="W1" value="103.62451799943291" />
+      <entry key="MS100" value="0.9874694053562999" />
+      <entry key="MS500" value="1.6563959026141772" />
+      <entry key="S2" value="4.025583227088445" />
+      <entry key="S5" value="8.008768822615485" />
+      <entry key="S10" value="12.2604857777273" />
+      <entry key="S30" value="17.76362994684296" />
+      <entry key="S60" value="19.721274244360103" />
+      <entry key="M2" value="20.81702206718349" />
+      <entry key="M5" value="21.540741394832242" />
+      <entry key="M10" value="23.17502623844432" />
+      <entry key="M15" value="27.415582422898403" />
+      <entry key="M30" value="44.151793215470754" />
+      <entry key="H1" value="66.59980782222335" />
+      <entry key="H2" value="85.33109755888113" />
+      <entry key="H4" value="97.48887386045008" />
+      <entry key="D1" value="109.39953507329503" />
+      <entry key="W1" value="111.62378565903697" />
     </decayedShown>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4,
@@ -173,7 +178,8 @@
       <workItem from="1793885805706" duration="145000" />
       <workItem from="1793885968694" duration="8000" />
       <workItem from="1794055660362" duration="36000" />
-      <workItem from="1794055722644" duration="1657000" />
+      <workItem from="1794055722644" duration="1766000" />
+      <workItem from="1794668213797" duration="770000" />
     </task>
     <task id="LOCAL-00001" summary="Pridane wireframu pre webovu aplikaciu">
       <option name="closed" value="true" />
@@ -207,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793468445637</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Zakladna databaza a CRUD operacie">
+      <option name="closed" value="true" />
+      <created>1794063977170</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1794063977170</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +232,7 @@
     <MESSAGE value="Pridane wireframu pre webovu aplikaciu" />
     <MESSAGE value="HTML a CSS navrh pre zakladne rozlozenie stranky" />
     <MESSAGE value="Integracia rozlozenia aplikacie do frameworku VAIIcko" />
-    <option name="LAST_COMMIT_MESSAGE" value="Integracia rozlozenia aplikacie do frameworku VAIIcko" />
+    <MESSAGE value="Zakladna databaza a CRUD operacie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Zakladna databaza a CRUD operacie" />
   </component>
 </project>

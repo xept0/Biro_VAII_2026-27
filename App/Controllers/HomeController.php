@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Artist;
 use App\Models\Song;
 use Exception;
 use Framework\Core\BaseController;
@@ -45,15 +46,11 @@ class HomeController extends BaseController
     public function index(Request $request): Response
     {
         $songs = Song::getAll(orderBy: '`id` DESC');
+        $artistsCount = Artist::getCount();
 
-        $artists = [];
         $noBarreCount = 0;
 
         foreach ($songs as $song) {
-            $artistName = strtolower(trim((string)$song->getArtist()));
-            if ($artistName !== '') {
-                $artists[$artistName] = true;
-            }
             if (stripos((string)$song->getTags(), 'no barre') !== false) {
                 $noBarreCount++;
             }
@@ -62,7 +59,7 @@ class HomeController extends BaseController
         return $this->html([
             'latestSongs' => array_slice($songs, 0, 3),
             'songsCount' => count($songs),
-            'artistsCount' => count($artists),
+            'artistsCount' => $artistsCount,
             'noBarreCount' => $noBarreCount,
         ]);
     }

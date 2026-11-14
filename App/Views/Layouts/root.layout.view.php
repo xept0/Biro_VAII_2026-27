@@ -75,8 +75,8 @@ $navClass = function (string $destination) use ($link, $currentUrl): string {
             <ul>
                 <li><a href="<?= $link->url('home.index') ?>" class="<?= $navClass('home.index') ?>">Dashboard</a></li>
                 <li><a href="<?= $link->url('song.index') ?>" class="<?= $navClass('song.index') ?>">Song Library</a></li>
+                <li><a href="<?= $link->url('artist.index') ?>" class="<?= $navClass('artist.index') ?>">Artists</a></li>
                 <!-- Pages below are not implemented yet -->
-                <li><span class="nav-disabled" title="Coming soon">Artists</span></li>
                 <li><span class="nav-disabled" title="Coming soon">Favorites</span></li>
                 <li><span class="nav-disabled" title="Coming soon">Practice Lists</span></li>
             </ul>

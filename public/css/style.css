@@ -707,12 +707,99 @@ a.tag {
     cursor: default;
 }
 
+/* Artist CRUD and 1:N relation helpers */
+.label-with-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.label-with-link .open-list {
+    font-size: 0.85rem;
+}
+
+.linked-songs-inline {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.artist-bio-section {
+    margin-bottom: 30px;
+}
+
+.artist-profile-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.artist-image-wrapper {
+    flex-shrink: 0;
+}
+
+.artist-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.artist-bio-text {
+    line-height: 1.6;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 15px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin-top: 3px;
+}
+
+.checkbox-item small {
+    display: block;
+    color: #888;
+    margin-top: 2px;
+}
+
+.admin-section-card {
+    margin-bottom: 30px;
+}
+
 @media (max-width: 992px) {
     .stats {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .form-row {
+        flex-direction: column;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .artist-profile-content {
         flex-direction: column;
     }
 }
